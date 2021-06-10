@@ -16,7 +16,7 @@
 // import { NavBar } from 'vant';
 import { Grid, GridItem } from 'vant';
 import { Swipe, SwipeItem } from 'vant';
-import { Toast } from 'vant';
+import { Tag,Button } from 'vant';
 export default {
   name:"app",
   data() {
@@ -32,7 +32,8 @@ export default {
     GridItem,
     Swipe,
     SwipeItem,
-    Toast
+    Tag,
+    Button
   }
 };
 </script>

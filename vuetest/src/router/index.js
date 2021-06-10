@@ -5,6 +5,7 @@ import Login from "../components/Login.vue"
 import User from "../components/User.vue"
 import Search from "../components/Search.vue"
 import Dingdan from "../components/Dingdan.vue"
+import Register from "../components/Register.vue"
 
 Vue.use(Router);
 
@@ -18,6 +19,11 @@ const routes = [
     path: '/login',
     name: 'login',
     component:Login
+  },
+  {
+    path:'/register',
+    name:'register',
+    component:Register
   },
   {
     path:'/user',

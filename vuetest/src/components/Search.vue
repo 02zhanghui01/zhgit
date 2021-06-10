@@ -2,7 +2,7 @@
     <div>
         <van-nav-bar title="搜索"></van-nav-bar>
        <form action="/">
-         <van-search v-model="value" show-action placeholder="请输入搜索关键词" @search="onSearch"/>
+         <van-search v-model="value" placeholder="请输入搜索关键词" ></van-search>
        </form>
        <van-card num="2" price="￥20起送/配送费约￥5" desc="描述信息" title="商品标题" thumb="https://img01.yzcdn.cn/vant/ipad.jpeg"/>
       <van-card num="2" price="￥20起送/配送费约￥5" desc="描述信息" title="商品标题" thumb="https://img01.yzcdn.cn/vant/ipad.jpeg"/>
@@ -21,12 +21,16 @@ export default {
     };
   },
   methods: {
-    onSearch(val) {
-      Toast(val);
-    },
-    Cancel() {
-      Toast('搜索');
-    },
+    
+    
   },
+  components:{
+    Toast
+  }
 }
 </script>
+<style>
+.pc{
+  border:1px solid #02A774;
+}
+</style>
