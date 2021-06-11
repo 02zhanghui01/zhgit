@@ -1,43 +1,37 @@
 <template>
     <div>
-      <van-nav-bar  title="正在定位..." right-text="登录|注册" left-arrow @click-right="clickRight">
+      <van-nav-bar  title="正在定位..." right-text left-arrow @click-right="clickRight">
           <template #left>
              <van-icon name="search" size="18" color="white"/>
+          </template>
+          <template #right>
+               <a href="#/login" style="color:white;">登录|</a>
+               <a href="#/register" style="color:white;">注册</a>
           </template>
         </van-nav-bar>
     <!-- 轮播 -->
      <van-swipe class="my-swipe" :autoplay="3000" indicator-color="white" >
         <van-swipe-item>
-          <van-grid :column-num="4">
-           <van-grid-item icon="photo-o" text="文字" />
-           <van-grid-item icon="photo-o" text="文字" />
-           <van-grid-item icon="photo-o" text="文字" />
-           <van-grid-item icon="photo-o" text="文字" />
-          </van-grid>
-          <van-grid :column-num="4">
-            <van-grid-item icon="photo-o" text="文字" />
-            <van-grid-item icon="photo-o" text="文字" />
-            <van-grid-item icon="photo-o" text="文字" />
-            <van-grid-item icon="photo-o" text="文字" />
+          <van-grid :column-num="4" >
+           <!-- 循环遍历数据data，将其渲染到页面上 -->
+           <van-grid-item  :text="item.name" v-for="item in data" :key="item.id"
+            :icon="'http://47.95.13.193:80/takeOutSystem-1.0-SNAPSHOT/'+item.photo" />
           </van-grid>
         </van-swipe-item>
         <van-swipe-item>
-          <van-grid :column-num="4">
-           <van-grid-item icon="photo-o" text="文字" />
-           <van-grid-item icon="photo-o" text="文字" />
-           <van-grid-item icon="photo-o" text="文字" />
-           <van-grid-item icon="photo-o" text="文字" />
-          </van-grid>
-          <van-grid :column-num="4">
-            <van-grid-item icon="photo-o" text="文字" />
-            <van-grid-item icon="photo-o" text="文字" />
-            <van-grid-item icon="photo-o" text="文字" />
-            <van-grid-item icon="photo-o" text="文字" />
-          </van-grid>
+          
+          <van-grid>
+            <van-grid-item  :text="item.name" v-for="item in data" :key="item.id"
+            :icon="'http://47.95.13.193:80/takeOutSystem-1.0-SNAPSHOT/'+item.photo" />
+        </van-grid>
         </van-swipe-item>
+
          </van-swipe>
       <!--  -->
-      
+      <div style="margin-top:10px;">
+        <van-icon name="bars"></van-icon>
+        <span>附近商家</span>
+      </div>
       <van-card num="2" price title thumb="https://img01.yzcdn.cn/vant/ipad.jpeg">
          <template #desc>
            <span style="margin-left:-20px;">
@@ -132,6 +126,8 @@ export default {
     data() {
        return {
           value:4,
+          data:'',
+
     };
   },
   methods:{
@@ -139,6 +135,28 @@ export default {
         this.$router.push('/login')
     }
   },
+
+//守卫回调函数，组件创建之前执行该函数
+    beforeRouteEnter(to,from,next){
+      next(function(vm){
+        //发送ajax，拿到九宫格请求数据
+        vm.$http.post("/biz/queryBigCategory").then(function(res){
+          console.log(res.data)
+          //将数值赋值给data
+          vm.data = res.data
+        })
+      })
+    },
+
+//组件创建之后执行该函数
+     beforeRouteUpdate(to,from,next){
+       var app = this;
+       this.$http.post('/biz/queryBigCategory').then(function(res){
+         app.data = res.data
+       })
+      next()
+     }
+  
   
 }
 </script>
