@@ -1,6 +1,7 @@
 <template>
     <div>
        <van-tabs v-model="active">
+        
   <van-tab title="注册">
     <van-form @submit="onSubmit">
   <van-field

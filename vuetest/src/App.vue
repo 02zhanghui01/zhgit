@@ -1,12 +1,5 @@
 <template>
   <div id="app">
-    <van-tabbar v-model="active">
-      <van-tabbar-item icon="home-o" to="/home">外卖</van-tabbar-item>
-      <van-tabbar-item icon="search" to="/search">搜索</van-tabbar-item>
-      <van-tabbar-item icon="friends-o" to="/dingdan">订单</van-tabbar-item>
-      <van-tabbar-item icon="contact" to="/user">我的</van-tabbar-item>
-   </van-tabbar>
-       
       <router-view></router-view>
     </div>
     
